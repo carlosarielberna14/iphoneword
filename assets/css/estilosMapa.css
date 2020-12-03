@@ -1,0 +1,53 @@
+ h1 {
+     float: right;
+     text-align: center;
+     color: darkgray;
+ }
+ 
+ html,
+ body {
+     float: right;
+     height: 100%;
+     margin: 0;
+     padding: 0;
+ }
+ 
+ #floating-panel {
+     float: left;
+     outline: 2px solid rgb(0, 255, 213);
+     width: 300px;
+     height: 250px;
+     position: absolute;
+     top: 10px;
+     left: 50%;
+     z-index: 5;
+     background-color: #fff;
+     padding: 5px;
+     border: 1px solid #888;
+     font-family: "a r i a l", serif;
+     font-size: 80%;
+     font-variant: all-small-caps;
+     line-height: 30px;
+     padding-left: 10px;
+ }
+ 
+ input[type=button] {
+     float: left;
+     color: white;
+     background-color: aqua;
+     border: 1px dotted #999;
+     border-radius: 0;
+     -webkit-appearance: none;
+ }
+ 
+ input[type=textbox] {
+     float: left;
+     -webkit-border-radius: 25px;
+     -moz-border-radius: 25px;
+     border-radius: 10px;
+ }
+ 
+ .formulario {
+     float: right;
+     text-align: center;
+ }

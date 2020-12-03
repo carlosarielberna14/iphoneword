@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <!-- Estilos personalizados -->
+    <link rel="stylesheet" href="assets/css/estilosMapa.css">
+
+    <link rel="stylesheet" href="assets/css/Blog1.css">
+    <link rel="stylesheet" href="assets/css/Productos.css">
+    <link rel="stylesheet" href="assets/css/normalize.css">
+
+    <script src="https://kit.fontawesome.com/9d6315ac3e.js"></script>
+    <title>CONTACTO</title>
+
+
+    <link rel="stylesheet" href="assets/css/estilosMapa.css">
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBB40gI7Ku6shNB9vaNQ-nxEjGIVISkaz8&callback=initMap&libraries=&v=weekly" defer></script>
+
+
+    <script>
+        var map, infoWindow, marker;
+        var nogales = {
+            lat: 20.4166526,
+            lng: -99.99857000000002
+        };
+
+        function initMap() {
+
+            map = new google.maps.Map(document.getElementById('map'), {
+                center: nogales,
+                zoom: 18
+            });
+
+            infoWindow = new google.maps.InfoWindow;
+
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(function(position) {
+                    var pos = {
+                        lat: position.coords.latitude,
+                        lng: position.coords.longitude
+
+                    };
+                    var marker = new google.maps.Marker({
+                        position: pos,
+                        map: nogales,
+                        title: 'Esta es tu posicion',
+                        icon: 'assets/images/icons/ubicacion.png'
+                    });
+
+                    //infoWindow.setPosition(pos);
+                    infoWindow.setContent('Te encuentras aqui');
+                    //infoWindow.open(map);
+
+                    map.setCenter(pos);
+                    google.maps.event.addListener(marker, 'click', function() {
+                        infoWindow.open(map, marker)
+                    });
+                }, function() {
+                    handleLocationError(true, infoWindow, map.getCenter());
+                });
+            } else {
+                handleLocationError(false, infoWindow, map.getCenter());
+            }
+
+
+            const geocoder = new google.maps.Geocoder();
+            //metodos que se crearon 
+            document.getElementById('submit2').addEventListener('click', () => {
+                geocodeAddress(geocoder, map);
+            });
+            document.getElementById('submit').addEventListener('click', () => {
+                geocodeName(geocoder, map);
+            });
+
+        } //End initMap
+        //Esta funcion recibe dos para
+        function geocodeAddress(geocoder, resultsMap) {
+            const address = document.getElementById('address').value;
+
+            geocoder.geocode({
+                    address: address
+                },
+                (results, status) => {
+                    if (status === "OK") {
+                        resultsMap.setCenter(results[0].geometry.location);
+
+                        var marker = new google.maps.Marker({
+                            position: results[0].geometry.location,
+                            map: resultsMap,
+                            title: "Estas en " + address,
+                            icon: 'assets/images/ubicacion.png'
+
+                        });
+
+                    } else {
+                        alert("La geocodificación no fue existosa por la siguiente razón: " + status);
+                    }
+                });
+
+        }
+
+        function geocodeName(geocoder, resultsMap) {
+            const address = document.getElementById('Nom').value;
+
+            geocoder.geocode({
+                    address: address
+                },
+                (results, status) => {
+                    if (status === "OK") {
+                        resultsMap.setCenter(results[0].geometry.location);
+
+                        var marker = new google.maps.Marker({
+                            position: results[0].geometry.location,
+                            map: resultsMap,
+                            title: "Estas en " + address,
+                            icon: 'assets/images/sitio.png'
+
+                        });
+
+                    } else {
+                        alert("La geocodificación no fue existosa por la siguiente razón: " + status);
+                    }
+                });
+
+        }
+
+        // END initMap
+
+        function handleLocationError(browserHasGeolocation, infoWindow, pos) {
+            infoWindow.setPosition(pos);
+            infoWindow.setContent(browserHasGeolocation ? 'Error, el servicio de geolocalizacion falló' :
+                'Error, el navegador no soporta Geolocalizacion');
+            infoWindow.open(map);
+
+            const map = new google.maps.Map(document.getElementById('map'), {
+                center: {
+                    lat: 20.4166526,
+                    lng: -99.99857000000002
+
+                },
+                zoom: 18
+            });
+
+        }
+    </script>
+</head>
+<header class="site-header inicio" style="height: 150px;" style="width: 150;">
+    <div class="contenedor">
+        <div class="barra-img">
+            <div class="barra">
+                <img src="assets/img/logo/logo.JPG" height="78" width="200" alt="" style="border-radius: 50%;">
+
+
+                <nav class="navegacion">
+                    <a href="Accesorios.html">Accesorios</a>
+                    <a href="productos.php">Productos</a>
+                    <a href="index.php">Metodos de pago</a>
+                    <a href="Blog.html">Blog</a>
+                    <a href="contacto.html">Contacto</a>
+                </nav>
+            </div>
+
+        </div>
+
+</header>
+
+<body>
+
+
+
+    <section id="contacto">
+        <div class="container">
+            <div class="row justify-content-md-center espacio-row">
+                <div class="col-md-6">
+                    <h1>Ponte en contacto</h1>
+                    <br>
+
+                </div>
+            </div>
+            <!--
+			<div id="resultado" class="row justify-content-md-center espacio-row">
+			</div>
+			-->
+            <div class="row justify-content-md-center espacio-row">
+                <div class="col-md-5">
+                    <form method="POST">
+                        <div class="form-group">
+                            <input type="text" class="form-control" id="nombre" name="nombre" placeholder="Nombre">
+                        </div>
+                        <div class="form-group">
+                            <input type="email" class="form-control" id="correo" name="correo" placeholder="Correo electrónico">
+                        </div>
+                        <div class="form-group">
+                            <input type="text" class="form-control" id="asunto" name="asunto" placeholder="Asunto">
+                        </div>
+                        <div class="form-group">
+                            <textarea class="form-control" id="mensaje" name="mensaje" rows="5" placeholder="Escribe aqui tu mensaje"></textarea>
+                        </div>
+
+                        <button id="btnComentarios" class="btn btn-primary">Enviar</button>
+
+                    </form>
+                </div>
+                <div class="col-md-5">
+                    <div class="row col-justify">
+                        <div class="col-md-1">
+                            <i class="fas fa-phone-alt"></i>
+                        </div>
+                        <div class="col-md-11">
+                            <h3>Teléfono</h3>
+                        </div>
+                    </div>
+                    <div class="row col-justify">
+                        <div class="col-md-1">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <div class="col-md-11">
+                            <h3>Correo</h3>
+                        </div>
+                    </div>
+                    <div class="row col-justify">
+                        <div class="col-md-1">
+                            <i class="fas fa-map-marked-alt"></i>
+                        </div>
+                        <div class="col-md-11">
+                            <h3>Dirección</h3>
+                        </div>
+                    </div>
+
+                    <div class="row col-justify">
+                        <div class="col-md-12">
+                            <h3>Redes Sociales</h3>
+                        </div>
+                    </div>
+                    <div class="row col-justify">
+                        <div class="col-md-12">
+                            <ul>
+                                <li>
+                                    <a href="https://www.facebook.com">
+                                        <img src="assets/img/social/facebook.PNG">
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="https://www.twitter.com">
+                                        <img src="assets/img/social/twitter.PNG">
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="https://www.instagram.com">
+                                        <img src="assets/img/social/instagram.PNG">
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Fin de contacto -->
+
+
+
+    <br>
+    <br>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+    <footer class="fondo">
+        <p>
+            Copyrigth &copy; 2020 IPHONEWORDL | Todos los derechos reservados</p>
+        <div id="map" style="width: 100%; height:448px">
+        </div>
+    </footer>
+</body>
+
+</html>
